@@ -27,16 +27,16 @@ The stack's main goals are to provide the following:
     ```
 
 ## Getting started
-1. **Set variables** for IP to bind to and data storage location.
+1. **Set variables** for data storage location (required) and IP to bind to (optional - default is `0.0.0.0` ⚠️ *this may not be what you want*).
     1. Option A: Setting these as environment variables that will be available to you when running `docker compose up -d`. For example, in `.bashrc`:
         ```bash
-        export BITCOIN_STACK_BIND_IP='192.168.1.100'
         export BITCOIN_STACK_DATA_DIR='/path/to/dir/bitcoin-stack'
+        export BITCOIN_STACK_BIND_IP='192.168.1.100'
         ```
     2. Option B: Add these to an `.env` file at the root of this project. `.gitignore` is set to ignore the `.env` file.
         ```
-        BITCOIN_STACK_BIND_IP='192.168.1.100'
         BITCOIN_STACK_DATA_DIR='/path/to/dir/bitcoin-stack'
+        BITCOIN_STACK_BIND_IP='192.168.1.100'
         ```
     3. Option C: Specify the variables at runtime (see below).
 1. **Start the stack**
@@ -45,7 +45,7 @@ The stack's main goals are to provide the following:
     ```
     If you skipped step 1 and want to specify the variables now, your command will look something like:
     ```bash
-    BITCOIN_STACK_BIND_IP='192.168.1.100' BITCOIN_STACK_DATA_DIR='/path/to/dir/bitcoin-stack' docker compose up -d
+    BITCOIN_STACK_DATA_DIR='/path/to/dir/bitcoin-stack' BITCOIN_STACK_BIND_IP='192.168.1.100' docker compose up -d
     ```
     If this is your first time starting the stack, the sync might take a while depending on your internet connection and compute.
 
