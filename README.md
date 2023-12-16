@@ -10,11 +10,11 @@ The stack's main goals are to provide the following:
 ## Details
 - Ports exposed
   - `50001`: *insecure* electrum rpc port
-  - :warning: Note that a reverse proxy is not provided here. I'm assuming that if you're looking at running a bitcoin stack in docker, you're probably the kind of person who might already have a preferred & secured setup for your networking environment. If not, I would suggest that you look into an option like [Tailscale](https://tailscale.com/) with custom ACLs and bind this exposed port only to your Tailscale IP.
+  - :warning: Note that a reverse proxy is not provided here. I'm assuming that if you're looking at running a bitcoin stack in docker, you're probably the kind of person who has a preferred & secured setup for your networking environment. If not, I would suggest that you look into an option like [Tailscale](https://tailscale.com/), use custom ACLs, and bind the exposed port only to your Tailscale IP.
 - Docker images used
   - [`briann/bitcoind`](https://hub.docker.com/repository/docker/briann/bitcoind) ([source](https://github.com/briann/docker-bitcoind))
   - [`briann/electrs`](https://hub.docker.com/repository/docker/briann/electrs) ([source](https://github.com/briann/electrs))
-  - At the moment you're trusting these two images. See [future additions](#future-additions) for the task to add some `Dockerfile`s into this repo so this important part is legibile.
+  - ⚠️ At the moment you're trusting these two images. See [future additions](#future-additions) for the task to add some `Dockerfile`s into this repo so this important part is legibile.
 
 ## System requirements
 - CPU & RAM requirements are pretty modest, though the initial sync will be more taxing. I'm currently running this in a VM with 2 CPUs & 4GB of RAM.
