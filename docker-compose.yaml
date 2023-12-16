@@ -1,0 +1,26 @@
+name: bitcoin
+services:
+
+  bitcoind:
+    image: briann/bitcoind:25.1
+    restart: unless-stopped
+    volumes:
+      - ${BITCOIN_STACK_DATA_DIR}/bitcoind:/bitcoin/.bitcoin
+
+  electrs:
+    image: briann/electrs:v0.10.0
+    restart: unless-stopped
+    depends_on:
+      - bitcoind
+    volumes:
+      - ${BITCOIN_STACK_DATA_DIR}/electrs:/electrs
+      - ${BITCOIN_STACK_DATA_DIR}/bitcoind:/root/.bitcoin
+    ports:
+      - ${BITCOIN_STACK_BIND_IP:-0.0.0.0}:50001:50001
+    environment:
+      - ELECTRS_DB_DIR=/electrs
+      - ELECTRS_DAEMON_RPC_ADDR=bitcoind:8332
+      - ELECTRS_DAEMON_P2P_ADDR=bitcoind:8333
+      - ELECTRS_ELECTRUM_RPC_ADDR=0.0.0.0:50001
+      - ELECTRS_MONITORING_ADDR=0.0.0.0:4224
+    entrypoint: "electrs"
